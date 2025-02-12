@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>React JS를 위한 JavaScript 문법 정리</h1>
+    <button id="btn1" style="color: blue;">클릭</button>
+    <div id="here">여기</div>
+
+    <script>
+        // 1. var, let, const
+        f1();
+
+        // 선언적 함수(호이스팅 됨)
+        function f1() {
+            var a = 10;
+            a = 100;
+
+            let b = 50;
+            {
+                let b = 20; // block 안에서만 유효
+            }
+
+            const c = 30;
+            // c = 40; // 상수는 변경 불가
+
+            console.log(a + b + c);
+
+            console.log(변수); // 호이스팅에 의해 선언이 맨 위로 올라감. 값은 undefined
+            var 변수 = "ReactJS";
+            console.log(변수);
+        }
+
+        // f2(); // 함수 할당 전이므로 변수 f2만 호이스팅된 상태(아직 함수 아님)
+        var f2 = function() {
+            console.log("익명 함수, 리터럴 이용");
+        }
+        f2();
+    </script>
+
+    <script>
+        // 2. callback 함수(함수가 파라미터로 전달, 받은 쪽에서 사용)
+        call2(3, call); // 파라미터로 전달
+
+        function call(num) {
+            console.log("call 함수이다." + num);
+        }
+
+        function call2(count, f) {
+            for (let i = 1; i <= 3; i++) {
+                f(i); // 받은 쪽에서 사용
+            }
+        }
+    </script>
+
+    <script>
+        // 3. 함수의 여러 형태
+        (function(score) {
+            console.log("익명 함수(즉시 실행 함수)" + score);
+        })(99);
+
+        const f3 = function(score) {
+            console.log("리터럴 함수(반드시 할당 후 사용 가능)" + score);
+        }
+        f3(100);
+
+        const f4 = (score) => {
+            console.log("화살표 함수" + score);
+        }
+        f4(98);
+    </script>
+
+    <script>
+        // 4. Class 문법
+        class Shape {
+            constructor(name) {
+                this.model = name; // 속성 초기화
+                this.draw = function() {
+                    console.log(this.model + "을 그립니다.");
+                };
+            }
+
+            display = function() {
+                console.log(this.model + "을 display 합니다.");
+            }
+
+            // Class 내의 메소드는 function 키워드를 사용하지 않는다.
+            display2() {
+                console.log(this.model + "을 display2 합니다.");
+            }
+        }
+
+        var myShape = new Shape("삼각형");
+        myShape.draw();
+        myShape.display();
+        myShape.display2();
+
+        class Rectangle extends Shape {
+            constructor(name, width, height) {
+                super(name);
+                this.width = width;
+                this.height = height;
+            }
+
+            show() {
+                console.log(this.model);
+                console.log(this.width);
+                console.log(this.height);
+
+                // 상속 받았기 때문에 부모의 함수 사용 가능
+                this.draw();
+                this.display();
+                this.display2();
+            }
+        }
+
+        var rect = new Rectangle("사각형", 100, 200);
+        rect.show();
+    </script>
+
+    <script>
+        // 5. this(현재 객체) 사용하기
+        class Header {
+            constructor() {
+                this.color = "red";
+            }
+
+            changeColor = function(e) {
+                var hereObj = document.getElementById("here");
+                if (this == window) {
+                    hereObj.style.backgroundColor = "orange";
+                    document.body.style.color = "green";
+                } else if(this.nodeName == "BUTTON") {
+                    hereObj.style.backgroundColor = "lightgreen";
+                    hereObj.style.color = this.style.color;
+                }
+                hereObj.innerHTML += this;
+                e.stopPropagation(); // 이벤트 전달 막기
+            }
+        }
+
+        var myHeader = new Header();
+        // 표준 이벤트 연결
+        window.addEventListener("click", myHeader.changeColor);
+        document.getElementById("btn1").addEventListener("click", myHeader.changeColor);
+    </script>
+
+    <script>
+        // 6. 배열 loop, map() 함수로 값 변형하여 새로운 배열 생성
+        var arr = ["자바", "HTML", "CSS", "JavaScript"];
+        var arr2 = arr.map(item => "<p>" + item + "</p>");
+
+        console.log(arr);
+        console.log(arr2);
+
+        document.querySelector("#here").innerHTML = arr2.join().replaceAll(",", "");
+    </script>
+
+    <script>
+        // 7. 배열 구조화 문법
+        const arr3 = ["아메리카노", "라떼", "주스", "딸기", "키위"];
+        const [v1, v2, v3, ...v4] = arr3;
+        console.log(v1);
+        console.log(v2);
+        console.log(v3);
+        console.log(v4);
+
+        const [r1, r2, r3, r4] = calc(10, 20);
+        console.log(r1);
+        console.log(r2);
+        console.log(r3);
+        console.log(r4);
+
+        function calc(a, b) {
+            const result1 = a + b;
+            const result2 = a - b;
+            const result3 = a * b;
+            const result4 = a / b;
+
+            return [result1, result2, result3, result4];
+        }
+    </script>
+
+    <script>
+        // 8. Object 구조화
+        const obj = {
+            brand: 'Ford',
+            model: 'Mustang',
+            type: 'car',
+            year: 2025,
+            color: 'red',
+            registration: {
+                city: "Houston",
+                state: "Texax",
+                country: "USA"
+            }
+        }
+
+        // 구조화 되지 않은 문법(기존 문법)
+        myCarInfo(obj);
+        function myCarInfo(car) {
+            console.log(car.model + ":" + car.registration.city);
+        }
+
+        // 구조화 문법(속성의 이름 변경 가능)
+        myCarInfo2(obj);
+        function myCarInfo2({brand, model:mm, registration:{city}}) {
+            console.log(brand + "의 " + mm + ":" + city)
+        }
+    </script>
+
+    <script>
+        // 9. 스프레드 연산자
+        const number1 = [1, 2, 3];
+        const number2 = [4, 5, 6];
+        const number3 = [number1, number2]; // 2차원
+        const number4 = [...number1, ...number2];
+        const [a, b, ...c] = number4;
+
+        console.log(number3); // [[1, 2, 3], [4, 5, 6]]
+        console.log(number4); // [1, 2, 3, 4, 5, 6]
+        console.log(a); // 1
+        console.log(b); // 2
+        console.log(c); // [3, 4, 5, 6]
+
+        const obj2 = {
+            brand: 'Ford',
+            model: 'Mustang',
+            type: 'car',
+            year: 2025,
+            color: 'red',
+            registration: {
+                city: "Houston",
+                state: "Texax",
+                country: "USA"
+            }
+        }
+        const obj3 = {name: "홍길동", age: 20};
+        const obj4 = {obj2:obj2, obj3:obj3}; // 키와 값이 같은 이름이면 생략
+        const obj5 = {obj2, obj3};
+        const obj6 = {"car": obj2, "customer": obj3}; // 키와 값이 다른 이름
+        const obj7 = {...obj2, ...obj3}; // 하나의 Object로 합치기(전개 연산자 사용)
+        console.log(obj4); // {obj2: {…}, obj3: {…}}
+        console.log(obj7); // {brand: 'Ford', model: 'Mustang', type: 'car', year: 2025, color: 'red', …}
+    </script>
+    
+    <script>
+        // 10. 비동기 처리(콜백 함수 사용)
+        const promise1 = new Promise(function(success, fail) {
+            // business logic 작성
+
+            setTimeout(success("비동기 처리 성공!"), 500); // 0.5초 후 성공 알리기
+        });
+        promise1.then(function(responseData) {
+            alert(responseData);
+        });
+
+        const promise2 = new Promise(function(success, fail) {
+            // business logic 작성
+
+            setTimeout(fail("비동기 처리 실패!"), 500); // 0.5초 후 실패 알리기
+        });
+        promise2.catch(function(responseData) {
+            alert(responseData);
+        });
+    </script>
+
+    <script type="module">
+        // 11. 모듈 스크립트
+        console.log("마지막에 수행됨 : " + typeof(btn2)); // 마지막에 수행됨 : object(type="module" 미 선언 시 undefined로 표시됨됨)
+    </script>
+    <button id="btn2">버튼2</button>
+
+    <script type="module" src="./go1.js"></script>
+    <script type="module" src="./go2.js"></script>
+</body>
+</html>
