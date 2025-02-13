@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap css
-import CounterApp from 'day2/CounterApp';
+import TimerApp from 'day3/useEffectTest/TimerApp';
 import 'index.css';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from 'reportWebVitals';
@@ -8,7 +8,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode> : 리액트앱 내부의 잠재적 문제를 검사하는 도구
   <>
-    <CounterApp></CounterApp>
+    {/* <Day3App></Day3App> */}
+
+    <TimerApp></TimerApp>
   </>
   // </React.StrictMode>
 );
