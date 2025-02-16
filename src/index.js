@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap css
-import TimerApp from 'day3/useEffectTest/TimerApp';
 import Day4App from 'day4/Day4App';
 import 'index.css';
 import ReactDOM from 'react-dom/client';
