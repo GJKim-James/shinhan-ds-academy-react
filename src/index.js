@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap css
-import Day4App from 'day4/Day4App';
+import StudentManager2 from 'day5/review/StudentManager2';
 import 'index.css';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from 'reportWebVitals';
@@ -12,7 +12,9 @@ root.render(
 
     {/* <TimerApp></TimerApp> */}
 
-    <Day4App></Day4App>
+    {/* <Day4App></Day4App> */}
+
+    <StudentManager2></StudentManager2>
   </>
   // </React.StrictMode>
 );
