@@ -1,8 +1,11 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
+import { StudentContext } from 'day5/review/commonData';
 
 function StudentInput(props) {
-    const { nameRef, majorRef, scoreRef, changeHandler, addHandler } = props;
+    const { nameRef, majorRef, scoreRef, changeHandler, addHandler } = useContext(StudentContext);
+
     return (
         <div className='mt-3'>
             이름 : <input type='text' ref={nameRef} name='name' onChange={changeHandler} className='me-2'></input>

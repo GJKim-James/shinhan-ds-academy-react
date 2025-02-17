@@ -1,8 +1,12 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import StudentComponent from 'day5/review//StudentComponent';
+import { useContext } from 'react';
+import { StudentContext } from 'day5/review/commonData';
 
-function StudentOutput({ studentList, updateHandler, deleteHandler }) {
+function StudentOutput() {
+    const { studentList } = useContext(StudentContext);
+
     return (
         <>
             <Table striped bordered hover className='text-center mt-3'>
@@ -19,7 +23,7 @@ function StudentOutput({ studentList, updateHandler, deleteHandler }) {
                 <tbody>
                     {/* studentList가 있으면 studentList.map() 수행 */}
                     {studentList && studentList.map((stu) => (
-                        <StudentComponent key={stu.id} student={stu} updateHandler={updateHandler} deleteStudent={deleteHandler}></StudentComponent>
+                        <StudentComponent key={stu.id} student={stu}></StudentComponent>
                     ))}
                 </tbody>
             </Table>

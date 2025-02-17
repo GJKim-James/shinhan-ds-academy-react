@@ -1,4 +1,4 @@
-import commonData, { calculateGrade } from 'day5/review/commonData';
+import commonData, { calculateGrade, StudentContext } from 'day5/review/commonData';
 import StudentInput from 'day5/review/StudentInput';
 import { studentListReducer } from 'day5/review/StudentListReducer';
 import StudentOutput from 'day5/review/StudentOutput';
@@ -71,13 +71,18 @@ function StudentManager2(props) {
         dispatcherStudentList({ type: "DELETE", id }); // useReducer의 dispatcher를 이용한 학생 삭제
     };
 
-    const inputObj = { nameRef, majorRef, scoreRef, changeHandler, addHandler };
-    const outputObj = { studentList, updateHandler, deleteHandler };
+    // const inputObj = { nameRef, majorRef, scoreRef, changeHandler, addHandler };
+    // const outputObj = { studentList, updateHandler, deleteHandler };
+
+    const contextData = { nameRef, majorRef, scoreRef, changeHandler, addHandler, studentList, updateHandler, deleteHandler };
 
     return (
         <div className='container'>
-            <StudentInput {...inputObj}></StudentInput>
-            <StudentOutput {...outputObj}></StudentOutput>
+            <h1>useReducer 예제</h1>
+            <StudentContext.Provider value={contextData}>
+                <StudentInput></StudentInput>
+                <StudentOutput></StudentOutput>
+            </StudentContext.Provider>
         </div>
     );
 }

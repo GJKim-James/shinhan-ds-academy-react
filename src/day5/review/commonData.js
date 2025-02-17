@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 const initstudentList = [
     {
       id: 1,
@@ -23,8 +25,10 @@ export const calculateGrade = (score) => {
     if (score >= 80) return "B";
     if (score >= 70) return "C";
     if (score >= 60) return "D";
-
     return "F";
 };
+
+// 전역 관리를 위해 Context 만들기
+export const StudentContext = createContext();
 
 export default initstudentList;

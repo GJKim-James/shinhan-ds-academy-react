@@ -1,7 +1,11 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
+import { StudentContext } from 'day5/review/commonData';
 
-function StudentComponent({ student, updateHandler, deleteStudent }) {
+function StudentComponent({ student }) {
+    const { updateHandler, deleteHandler } = useContext(StudentContext);
+    
     // 수정
     const f_update = (e) => {
         const fieldName = e.target.name;
@@ -12,7 +16,7 @@ function StudentComponent({ student, updateHandler, deleteStudent }) {
 
     // 삭제
     const f_delete = () => {
-        deleteStudent(student.id);
+        deleteHandler(student.id);
     };
 
     return (

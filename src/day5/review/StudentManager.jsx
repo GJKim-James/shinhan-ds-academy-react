@@ -1,4 +1,4 @@
-import commonData from 'day5/review/commonData';
+import commonData, { StudentContext } from 'day5/review/commonData';
 import StudentInput from 'day5/review/StudentInput';
 import StudentOutput from 'day5/review/StudentOutput';
 import { useCallback, useRef, useState } from 'react';
@@ -23,7 +23,7 @@ function StudentManager(props) {
     const [studentList, setStudentList] = useState(commonData);
 
     const changeHandler = useCallback((e) => { // student가 변경될 때만 changeHandler 수행되게끔 useCallback 선언
-        console.log(e.target.name, e.target.value);
+        // console.log(e.target.name, e.target.value);
         const fieldName = e.target.name;
         setStudent({ ...student, [fieldName]: e.target.value });
     }, [student]);
@@ -99,11 +99,15 @@ function StudentManager(props) {
 
     const inputObj = { nameRef, majorRef, scoreRef, changeHandler, addHandler };
     const outputObj = { studentList, updateHandler, deleteHandler };
+    const inoutObj = { ...inputObj, ...outputObj };
 
     return (
         <div className='container'>
-            <StudentInput {...inputObj}></StudentInput>
-            <StudentOutput {...outputObj}></StudentOutput>
+            <h1>StudentManager(useState로 상태 관리하기)</h1>
+            <StudentContext.Provider value={inoutObj}>
+                <StudentInput></StudentInput>
+                <StudentOutput></StudentOutput>
+            </StudentContext.Provider>
         </div>
     );
 }
