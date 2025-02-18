@@ -1,8 +1,6 @@
 import axios from 'axios';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Button, Form, InputGroup, Table } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function WebBoardDetail(props) {
