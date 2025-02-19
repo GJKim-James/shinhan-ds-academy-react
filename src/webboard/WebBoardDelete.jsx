@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React from 'react';
+import { call } from 'login/service/ApiService';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -13,16 +12,30 @@ function WebBoardDelete(props) {
     const bno = location.state.bno;
     const navi = useNavigate();
 
+    // useEffect(() => {
+    //     axios({
+    //         url: `http://localhost:7777/shinhan/api/webboard/delete/${bno}`,
+    //         method: "DELETE"
+    //     }).then((response) => {
+    //         alert(response.data);
+    //         navi("/webboard/list");
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // }, [bno]);
+
+    // JWT 이용한 게시글 삭제
     useEffect(() => {
-        axios({
-            url: `http://localhost:7777/shinhan/api/webboard/delete/${bno}`,
-            method: "DELETE"
-        }).then((response) => {
-            alert(response.data);
-            navi("/webboard/list");
-        }).catch((err) => {
-            console.log(err);
-        });
+        const accessToken = localStorage.getItem("ACCESS_TOKEN");
+        if (accessToken === null) {
+            alert("로그인 필요");
+            window.location.href = "/login";
+        } else {
+            call(`/api/webboard/delete/${bno}`, "DELETE", null).then((response) => {
+                alert("Link를 통한 게시글 삭제 성공!");
+                navi("/webboard/list");
+            });
+        }
     }, [bno]);
 
     return (

@@ -15,20 +15,15 @@ function WebBoardHome(props) {
 
     return (
         <div>
+            <Link to={"/"} className='btn btn-dark mt-2'>◀️ Home으로</Link>
             <h1>WebBoard</h1>
             <ul>
-                <li>
-                    <Link to={"/webboard/list"}>조회(Link)</Link>&nbsp;
-                    <Button onClick={clickHandler}>조회(버튼)</Button>
+                <li className='mb-2'>
+                    <Link to={"/webboard/list"} className='btn btn-danger'>조회(Link)</Link>&nbsp;
+                    <Button variant='warning' onClick={clickHandler}>조회(버튼)</Button>
                 </li>
                 <li>
-                    <Link to={"/webboard/insert"}>입력(절대경로)</Link>
-                </li>
-                <li>
-                    <Link to={"/webboard/detail"}>상세보기(절대경로)</Link>
-                </li>
-                <li>
-                    <Link to={"/webboard/delete"}>삭제(절대경로)</Link>
+                    <Link to={"/webboard/insert"} className='btn btn-success'>등록(절대경로)</Link>
                 </li>
             </ul>
 

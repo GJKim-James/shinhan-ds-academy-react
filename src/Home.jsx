@@ -18,6 +18,8 @@ function Home(props) {
                 <li><Link to={"/day4/ref2"} className='btn btn-primary mb-1'>RefTest3</Link></li>
                 <li><Link to={"/webboard"} className='btn btn-primary mb-1'>WebBoard로 이동</Link></li>
                 <li><Link to={"/emp"} className='btn btn-primary mb-1'>Emp로 이동</Link></li>
+                <li><Link to={"/login"} className='btn btn-primary mb-1'>로그인</Link></li>
+                <li><Link to={"/signup"} className='btn btn-primary mb-1'>회원가입</Link></li>
             </ul>
         </div>
     );

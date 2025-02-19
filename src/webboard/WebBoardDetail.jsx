@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { call } from 'login/service/ApiService';
 import { useEffect, useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,17 +8,30 @@ function WebBoardDetail(props) {
 
     const [board, setBoard] = useState({});
 
+    // useEffect(() => {
+    //     axios({
+    //         url: `http://localhost:7777/shinhan/api/webboard/detail/${boardNo}`,
+    //         method: "GET"
+    //     })
+    //         .then((response) => {
+    //             setBoard(response.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }, [boardNo]);
+
+    // JWT 이용한 게시글 상세보기
     useEffect(() => {
-        axios({
-            url: `http://localhost:7777/shinhan/api/webboard/detail/${boardNo}`,
-            method: "GET"
-        })
-            .then((response) => {
-                setBoard(response.data);
-            })
-            .catch((err) => {
-                console.log(err);
+        const accessToken = localStorage.getItem("ACCESS_TOKEN");
+        if (accessToken === null) {
+            alert("로그인 필요");
+            window.location.href = "/login";
+        } else {
+            call(`/api/webboard/detail/${boardNo}`, "GET", null).then((response) => {
+                setBoard(response);
             });
+        }
     }, [boardNo]);
 
     useEffect(() => {
@@ -33,17 +46,31 @@ function WebBoardDetail(props) {
     const navi = useNavigate();
 
     // 게시글 수정 버튼 로직
+    // const updateHandler = () => {
+    //     axios({
+    //         url: "http://localhost:7777/shinhan/api/webboard/update",
+    //         method: "PUT",
+    //         data: board
+    //     }).then((response) => {
+    //         alert(response.data);
+    //         navi("/webboard/list");
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // };
+
+    // JWT 이용한 게시글 수정
     const updateHandler = () => {
-        axios({
-            url: "http://localhost:7777/shinhan/api/webboard/update",
-            method: "PUT",
-            data: board
-        }).then((response) => {
-            alert(response.data);
-            navi("/webboard/list");
-        }).catch((err) => {
-            console.log(err);
-        });
+        const accessToken = localStorage.getItem("ACCESS_TOKEN");
+        if (accessToken === null) {
+            alert("로그인 필요");
+            window.location.href = "/login";
+        } else {
+            call("/api/webboard/update", "PUT", board).then((response) => {
+                alert("게시글 수정 성공!");
+                navi("/webboard/list");
+            });
+        }
     };
 
     return (

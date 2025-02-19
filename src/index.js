@@ -13,6 +13,8 @@ import StudentManager2 from 'day5/review/StudentManager2';
 import EmpHome from 'emp/EmpHome';
 import Home from 'Home';
 import 'index.css';
+import Login from 'login/Login';
+import SignUp from 'login/SignUp';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from 'reportWebVitals';
@@ -38,6 +40,8 @@ root.render(
         <Route path='/day4/ref3' element={<RefTest3></RefTest3>}></Route>
         <Route path='/webboard/*' element={<WebBoardHome></WebBoardHome>}></Route>
         <Route path='/emp/*' element={<EmpHome></EmpHome>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>
     </BrowserRouter>
   </>
