@@ -10,6 +10,7 @@ import RefTest3 from 'day4/RefTest3';
 import UseMemoTest from 'day4/UseMemoTest';
 import StudentManager from 'day5/review/StudentManager';
 import StudentManager2 from 'day5/review/StudentManager2';
+import EmpHome from 'emp/EmpHome';
 import Home from 'Home';
 import 'index.css';
 import ReactDOM from 'react-dom/client';
@@ -36,6 +37,7 @@ root.render(
         <Route path='/day4/ref2' element={<RefTest2></RefTest2>}></Route>
         <Route path='/day4/ref3' element={<RefTest3></RefTest3>}></Route>
         <Route path='/webboard/*' element={<WebBoardHome></WebBoardHome>}></Route>
+        <Route path='/emp/*' element={<EmpHome></EmpHome>}></Route>
       </Routes>
     </BrowserRouter>
   </>
